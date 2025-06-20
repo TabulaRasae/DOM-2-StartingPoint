@@ -1,7 +1,49 @@
 // Please feel free to change the JS as you see fit! This is just a starting point.
+/* 
+ add rows to the grid  ***done
+ add columns to the grid  *** done
+ remove rows from the grid  ***
+ remove columns from the grid
+ select a color from a dropdown menu of colors
+ click on a single cell, changing its color to the currently selected color
+ fill all uncolored cells with the currently selected color
+ fill all cells with the currently selected color
+ clear all cells/restore all cells to their original/initial color
+ click and hold (mouseover) from a single cell (start) to a different cell (end) such that all affected/hovered-over cells 
+ from start to end change to the currently selected color */
+
+
 
 const root = document.getElementById("root");
 root.addEventListener("click", (event) => {
-  console.log(event.target.tagName);
-  console.log(event.target);
+  console.log("this TagName", event.target.tagName);
+  console.log("this is Target",event.target);
+
+  const createTr = document.createElement("tr"); // this create a tr
+  const createButton = document.createElement("button"); // this create button
+  const addRowButton = document.getElementById("add-row"); // this is add button
+  const divButtons = document.getElementById("buttons"); // this is button container
+  const tbody = document.getElementsByTagName("TBODY")[0]; // this is table element
+  
+  if(event.target.id === "add-row") {
+    const colCount = tbody.rows[0].cells.length;
+
+    for (let i = 0; i < colCount; i++) {
+      const createTd = document.createElement("td");// this crreats a td
+      createTr.appendChild(createTd);
+      console.log("this is",i)
+    }
+    tbody.appendChild(createTr);
+  } 
+  //----------
+  if (event.target.id === "add-column") {
+    const rowCount = tbody.rows.length;
+
+    for (let i = 0; i < rowCount; i++) {
+      const createTd = document.createElement("td");
+      tbody.rows[i].appendChild(createTd);
+    }
+  }
+
+  
 });
