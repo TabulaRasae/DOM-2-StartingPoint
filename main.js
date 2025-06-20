@@ -3,9 +3,9 @@
  add rows to the grid  ***done
  add columns to the grid  *** done
  remove rows from the grid  ***done
- remove columns from the grid  ***
- select a color from a dropdown menu of colors
- click on a single cell, changing its color to the currently selected color
+ remove columns from the grid  *** done
+ select a color from a dropdown menu of colors  ** done
+ click on a single cell, changing its color to the currently selected color ***
  fill all uncolored cells with the currently selected color
  fill all cells with the currently selected color
  clear all cells/restore all cells to their original/initial color
@@ -17,6 +17,10 @@
 const root = document.getElementById("root");
 const divButtons = document.getElementById("buttons"); // this is button container
 const createRemoveButton = document.createElement("button"); // this create button
+
+
+
+
 
 
 root.addEventListener("click", (event) => {
@@ -53,8 +57,10 @@ root.addEventListener("click", (event) => {
   if(event.target.id === "remove-row-button") {
     const rowCount = tbody.rows.length;
     const lastRow = rowCount - 1;
-
-    tbody.deleteRow(lastRow);
+    if(rowCount > 1) {
+      tbody.deleteRow(lastRow);
+    }
+    
     // for (let i = 0; i < colCount; i++) {
     //   const createTd = document.createElement("td");
     //   createTr.appendChild(createTd);
@@ -66,8 +72,25 @@ root.addEventListener("click", (event) => {
     const rowCount = tbody.rows.length;
     for(let i = 0; i < rowCount; i++) {
       const row = tbody.rows[i];
-      row.deleteCell(-1);
+      // if(row.cell.length > 1) {
+        row.deleteCell(-1);
+      // }
     }
+  }
+
+  const colorSelect = document.getElementById("color-select");
+  let selectedColor = colorSelect.value;
+  
+  if( event.target.id === "color-select"){
+    if(colorSelect.value === "Red"){
+      selectedColor = "Red";
+    }else if(colorSelect.value === "Blue"){
+      selectedColor = "Blue";
+    }
+    console.log(selectedColor)
+  }
+  if(event.target.tagName === "TD") {
+    event.target.style.backgroundColor = selectedColor;
   }
   
 });
@@ -81,5 +104,11 @@ const removeColunmButton = document.createElement("button");
 removeColunmButton.id = "remove-colunm-button"
 removeColunmButton.textContent = "Remove Colunm";
 divButtons.appendChild(removeColunmButton);
+
+
+
+
+
+
 
 
